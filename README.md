@@ -18,3 +18,14 @@ A modern compliance and operations dashboard for Registered Investment Advisers.
 - Tailwind CSS
 - React Router
 - Lucide React
+
+## Development
+
+```bash
+npm install
+npm start
+```
+
+## Deployment
+
+This project is deployed on Vercel with automatic deployments.
