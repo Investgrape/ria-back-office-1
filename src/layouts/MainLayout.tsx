@@ -22,6 +22,11 @@ interface NavItem {
   icon: LucideIcon;
 }
 
+interface NavItemComponentProps {
+  item: NavItem;
+  isBottom?: boolean;
+}
+
 // Sidebar Component
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -44,7 +49,7 @@ const Sidebar = () => {
     { id: 'logout', label: 'Logout', icon: LogOut },
   ];
 
-  const NavItemComponent: React.FC<{ item: NavItem; isBottom?: boolean }> = ({ item, isBottom = false }) => (
+  const NavigationItem: React.FC<NavItemComponentProps> = ({ item, isBottom = false }) => (
     <button
       onClick={() => setActiveItem(item.id)}
       className={`
@@ -100,14 +105,14 @@ const Sidebar = () => {
       {/* Main Navigation */}
       <div className="px-2 space-y-1">
         {mainNavItems.map(item => (
-          <NavItemComponent key={item.id} item={item} />
+          <NavigationItem key={item.id} item={item} />
         ))}
       </div>
 
       {/* Bottom Navigation */}
       <div className="absolute bottom-8 left-0 right-0 px-2 space-y-1">
         {bottomNavItems.map(item => (
-          <NavItemComponent key={item.id} item={item} isBottom />
+          <NavigationItem key={item.id} item={item} isBottom />
         ))}
       </div>
     </div>
