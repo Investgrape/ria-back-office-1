@@ -2,9 +2,13 @@
 
 A modern compliance and operations dashboard for Registered Investment Advisers.
 
+## Overview
+
+This application helps RIAs manage their regulatory compliance, operations, document management, and client relationships.
+
 ## Features
 
-- Dashboard analytics
+- Dashboard with key metrics
 - Document management
 - Email system
 - Employee tracking
