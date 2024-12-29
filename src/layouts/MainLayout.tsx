@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 import {
   LayoutDashboard,
   FileText,
@@ -14,13 +14,14 @@ import {
   HelpCircle,
   LogOut
 } from 'lucide-react';
+import { NavItem, NavItemProps } from '../types/navigation';
 
 // Sidebar Component
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState('dashboard');
 
-  const mainNavItems = [
+  const mainNavItems: NavItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'documents', label: 'Documents', icon: FileText },
     { id: 'email', label: 'Email', icon: Mail },
@@ -30,14 +31,14 @@ const Sidebar = () => {
     { id: 'agreements', label: 'Agreements', icon: FileSignature },
   ];
 
-  const bottomNavItems = [
+  const bottomNavItems: NavItem[] = [
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'settings', label: 'Settings', icon: Settings },
     { id: 'help', label: 'Help & Support', icon: HelpCircle },
     { id: 'logout', label: 'Logout', icon: LogOut },
   ];
 
-  const NavItem = ({ item, isBottom = false }) => (
+  const NavItem: React.FC<NavItemProps> = ({ item, isBottom = false }) => (
     <button
       onClick={() => setActiveItem(item.id)}
       className={`
@@ -107,8 +108,12 @@ const Sidebar = () => {
   );
 };
 
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
 // Main Layout Component
-const MainLayout = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="flex h-screen bg-slate-50">
       {/* Sidebar */}
