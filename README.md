@@ -1,6 +1,6 @@
 # RIA Back Office
 
-A compliance and operations dashboard for Registered Investment Advisers
+A compliance and operations dashboard for Registered Investment Advisers. This system helps RIAs manage their regulatory compliance, operations, document management, and client relationships.
 
 ## Features
 
