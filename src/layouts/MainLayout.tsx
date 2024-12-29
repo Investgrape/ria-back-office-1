@@ -12,9 +12,15 @@ import {
   ChevronRight,
   Bell,
   HelpCircle,
-  LogOut
+  LogOut,
+  LucideIcon
 } from 'lucide-react';
-import { NavItem, NavItemProps } from '../types/navigation';
+
+interface NavItem {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+}
 
 // Sidebar Component
 const Sidebar = () => {
@@ -38,7 +44,7 @@ const Sidebar = () => {
     { id: 'logout', label: 'Logout', icon: LogOut },
   ];
 
-  const NavItem: React.FC<NavItemProps> = ({ item, isBottom = false }) => (
+  const NavItemComponent: React.FC<{ item: NavItem; isBottom?: boolean }> = ({ item, isBottom = false }) => (
     <button
       onClick={() => setActiveItem(item.id)}
       className={`
@@ -94,14 +100,14 @@ const Sidebar = () => {
       {/* Main Navigation */}
       <div className="px-2 space-y-1">
         {mainNavItems.map(item => (
-          <NavItem key={item.id} item={item} />
+          <NavItemComponent key={item.id} item={item} />
         ))}
       </div>
 
       {/* Bottom Navigation */}
       <div className="absolute bottom-8 left-0 right-0 px-2 space-y-1">
         {bottomNavItems.map(item => (
-          <NavItem key={item.id} item={item} isBottom />
+          <NavItemComponent key={item.id} item={item} isBottom />
         ))}
       </div>
     </div>
