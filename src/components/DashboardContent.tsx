@@ -1,31 +1,68 @@
 import React from 'react';
 import { Activity, Wallet, AlertTriangle, Flag } from 'lucide-react';
 
-const DashboardContent = () => {
+interface MetricCardProps {
+  title: string;
+  value: string;
+  change: string;
+  Icon: typeof Activity | typeof Wallet;
+  isPositive: boolean;
+}
+
+const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, Icon, isPositive }) => (
+  <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+    <div className="flex justify-between items-start">
+      <div>
+        <p className="text-sm text-slate-500">{title}</p>
+        <h3 className="text-2xl font-semibold mt-1">{value}</h3>
+        <p className={`text-sm mt-1 ${isPositive ? 'text-emerald-600' : 'text-red-600'}`}>
+          {isPositive ? '↑' : '↓'} {change}
+        </p>
+      </div>
+      <Icon className={isPositive ? 'text-emerald-600' : 'text-red-600'} />
+    </div>
+  </div>
+);
+
+interface AlertProps {
+  message: string;
+  type: 'error' | 'warning' | 'info';
+}
+
+const Alert: React.FC<AlertProps> = ({ message, type }) => {
+  const colors = {
+    error: 'bg-red-50 text-red-700',
+    warning: 'bg-amber-50 text-amber-700',
+    info: 'bg-blue-50 text-blue-700'
+  };
+
+  return (
+    <div className={`flex items-center justify-between p-3 rounded ${colors[type]}`}>
+      <span className="text-sm">{message}</span>
+      <Flag size={18} />
+    </div>
+  );
+};
+
+const DashboardContent: React.FC = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Main Metrics */}
       <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="text-sm text-slate-500">Assets Under Management</p>
-              <h3 className="text-2xl font-semibold mt-1">$245.8M</h3>
-              <p className="text-sm text-emerald-600 mt-1">↑ 2.5% from last month</p>
-            </div>
-            <Activity className="text-emerald-600" />
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="text-sm text-slate-500">Total Revenue</p>
-              <h3 className="text-2xl font-semibold mt-1">$1.2M</h3>
-              <p className="text-sm text-emerald-600 mt-1">↑ 1.8% from last month</p>
-            </div>
-            <Wallet className="text-emerald-600" />
-          </div>
-        </div>
+        <MetricCard
+          title="Assets Under Management"
+          value="$245.8M"
+          change="2.5% from last month"
+          Icon={Activity}
+          isPositive={true}
+        />
+        <MetricCard
+          title="Total Revenue"
+          value="$1.2M"
+          change="1.8% from last month"
+          Icon={Wallet}
+          isPositive={true}
+        />
       </div>
 
       {/* Alerts Section */}
@@ -36,14 +73,18 @@ const DashboardContent = () => {
             Recent Alerts
           </h3>
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-red-50 text-red-700 rounded">
-              <span className="text-sm">Client agreement expiring in 5 days</span>
-              <Flag size={18} />
-            </div>
-            <div className="flex items-center justify-between p-3 bg-amber-50 text-amber-700 rounded">
-              <span className="text-sm">Employee compliance training due</span>
-              <Flag size={18} />
-            </div>
+            <Alert
+              message="Client agreement expiring in 5 days"
+              type="error"
+            />
+            <Alert
+              message="Employee compliance training due"
+              type="warning"
+            />
+            <Alert
+              message="New regulation update available"
+              type="info"
+            />
           </div>
         </div>
       </div>
