@@ -1,9 +1,9 @@
 import React from 'react';
-import { Activity, Users, FileText } from 'lucide-react';
+import { Activity, Users, FileText, ArrowUp, ArrowDown } from 'lucide-react';
 
 function MetricCard({ title, value, change, Icon, trend }) {
   const trendColor = trend === 'up' ? 'text-emerald-600' : 'text-amber-600';
-  const trendArrow = trend === 'up' ? '↑' : '↓';
+  const TrendArrow = trend === 'up' ? ArrowUp : ArrowDown;
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -11,9 +11,10 @@ function MetricCard({ title, value, change, Icon, trend }) {
         <div>
           <p className="text-gray-500 text-sm">{title}</p>
           <p className="text-2xl font-semibold mt-1">{value}</p>
-          <p className={`text-sm mt-1 ${trendColor}`}>
-            {trendArrow} {change}
-          </p>
+          <div className={`flex items-center gap-1 mt-1 ${trendColor}`}>
+            <TrendArrow size={16} />
+            <span className="text-sm">{change}</span>
+          </div>
         </div>
         <Icon className={trendColor} />
       </div>
@@ -23,9 +24,9 @@ function MetricCard({ title, value, change, Icon, trend }) {
 
 function Dashboard() {
   return (
-    <div className="p-6">
+    <div>
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">RIA Back Office</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-gray-500">Welcome back, John</p>
       </header>
 
